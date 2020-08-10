@@ -9,6 +9,7 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
 
     const renderWeather = (cityData) => {
         const temps = cityData.list.map(weather => weather.main.temp)
+        const humidity = cityData.list.map(weather => weather.main.humidity)
         console.log(temps)
         return (
           <tr key={cityData?.city?.name}>
@@ -16,6 +17,11 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
             <td>
               <Sparklines height={50} width={100} data={temps}>
                 <SparklinesLine color="blue" />
+              </Sparklines>
+            </td>
+            <td>
+              <Sparklines height={50} width={100} data={humidity}>
+                <SparklinesLine color="red" />
               </Sparklines>
             </td>
           </tr>
