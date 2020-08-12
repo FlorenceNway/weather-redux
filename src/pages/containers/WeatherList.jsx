@@ -9,8 +9,10 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
 
     const renderWeather = (cityData) => {
         const temps = cityData.list.map(weather => weather.main.temp)
+        const pressure = cityData.list.map(weather => weather.main.pressure)
         const humidity = cityData.list.map(weather => weather.main.humidity)
-        console.log(temps)
+        const icon0 = cityData.list.map((data,index) => data.weather[index])
+       
         return (
           <tr key={cityData?.city?.name}>
             <td>{cityData?.city?.name}</td>
@@ -19,10 +21,17 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
                 <SparklinesLine color="blue" />
               </Sparklines>
             </td>
+            <td><Sparklines height={50} width={100} data={pressure}>
+                <SparklinesLine color="blue" />
+              </Sparklines>
+              </td>
             <td>
               <Sparklines height={50} width={100} data={humidity}>
                 <SparklinesLine color="red" />
               </Sparklines>
+            </td>
+            <td>
+              {/* <img src={`http://openweathermap.org/img/wn/${icon0}@2x.png` } alt="icon"/> */}
             </td>
           </tr>
         );
@@ -37,6 +46,7 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
                         <th>Temperature</th>
                         <th>Pressure</th>
                         <th>Humidity</th>
+                        <th>Icon</th>
                     </tr>
                 </thead>
                 <tbody>
