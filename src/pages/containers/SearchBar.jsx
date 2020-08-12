@@ -26,9 +26,9 @@ class SearchBar extends Component {
     render() {
         return (
             <form onSubmit={this.onFormSubmit} className="input-group mt-5 d-flex justify-content-center">
-                <input placeholder="Search forecast in cities"
+                <input placeholder="Search forecast in cities .."
                 value={this.state.term}
-                onChange={this.onInputChange}/>
+                onChange={this.onInputChange} style={{width:'300px'}}/>
                 <button type="submit" className="btn btn-secondary ml-3">Submit</button>
             </form>
         )
