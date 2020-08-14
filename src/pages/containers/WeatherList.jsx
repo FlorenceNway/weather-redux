@@ -11,7 +11,7 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
         const temps = cityData.list.map(weather => weather.main.temp)
         const pressure = cityData.list.map(weather => weather.main.pressure)
         const humidity = cityData.list.map(weather => weather.main.humidity)
-        const icon0 = cityData.list.map((data,index) => data.weather[index])
+        const icons = cityData.list.map((data,index) => data.weather[index])
        
         return (
           <tr key={cityData?.city?.name}>
@@ -21,20 +21,38 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
                 <SparklinesLine color="blue" />
               </Sparklines>
             </td>
-            <td><Sparklines height={50} width={100} data={pressure}>
+            <td>
+              <Sparklines height={50} width={100} data={pressure}>
                 <SparklinesLine color="blue" />
               </Sparklines>
-              </td>
+            </td>
             <td>
               <Sparklines height={50} width={100} data={humidity}>
                 <SparklinesLine color="red" />
               </Sparklines>
             </td>
             <td>
-              {/* <img src={`http://openweathermap.org/img/wn/${icon0}@2x.png` } alt="icon"/> */}
+               <tr>
+                   <td></td>
+                </tr> 
+              {/* {icons.map((icon) => (
+                <img
+                  src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+                  alt="icon"
+                />
+              ))} */}
             </td>
           </tr>
         );
+    }
+
+    const renderTime = (weather) => {
+        const dts = weather.list.map(lis => lis.dt_txt)
+        const timesFullArray = dts.map(time => time.split(' ')[1])
+        const times = timesFullArray.slice(0,16)
+        
+    return times.map(time => <td>{time}</td>)
+    
     }
 
     return (
@@ -46,7 +64,7 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
                         <th>Temperature</th>
                         <th>Pressure</th>
                         <th>Humidity</th>
-                        <th>Icon</th>
+                        <th>{weather.map(renderTime)}</th>
                     </tr>
                 </thead>
                 <tbody>
