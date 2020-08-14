@@ -11,7 +11,6 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
         const temps = cityData.list.map(weather => weather.main.temp)
         const pressure = cityData.list.map(weather => weather.main.pressure)
         const humidity = cityData.list.map(weather => weather.main.humidity)
-        const icons = cityData.list.map((data,index) => data.weather[index])
        
         return (
           <tr key={cityData?.city?.name}>
@@ -31,17 +30,6 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
                 <SparklinesLine color="red" />
               </Sparklines>
             </td>
-            <td>
-               <tr>
-                   <td></td>
-                </tr> 
-              {/* {icons.map((icon) => (
-                <img
-                  src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
-                  alt="icon"
-                />
-              ))} */}
-            </td>
           </tr>
         );
     }
@@ -50,26 +38,50 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
         const dts = weather.list.map(lis => lis.dt_txt)
         const timesFullArray = dts.map(time => time.split(' ')[1])
         const times = timesFullArray.slice(0,16)
-        
-    return times.map(time => <td>{time}</td>)
-    
+      return times.map(time => <th>{time.slice(0,5)}</th>)
     }
+
+    const renderIcon = (weather) => {
+      const fullIcons = weather.list.map((data, index) => data.weather[index])
+      const icons = fullIcons.slice(0,16)
+      return icons.map((icon) => (
+          <td>
+            <img
+              src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
+              alt="icon"
+            />
+         </td>
+        ))
+      }
+
 
     return (
         <div className="mt-5 p-5">
             <table className="table table-hover">
-                <thead>
-                    <tr>
-                        <th>City</th>
-                        <th>Temperature</th>
-                        <th>Pressure</th>
-                        <th>Humidity</th>
-                        <th>{weather.map(renderTime)}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {weather.map(renderWeather)}
-                </tbody>
+              <thead>
+                  <tr>
+                      <th>City</th>
+                      <th>Temperature</th>
+                      <th>Pressure</th>
+                      <th>Humidity</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {weather.map(renderWeather)}
+              </tbody>
+            </table>
+
+            <table className="table table-hover">
+              <thead>
+                <tr>
+                  {weather.map(renderTime)}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  {weather.map(renderIcon)}
+                </tr>
+              </tbody>
             </table>
         </div>
     )
