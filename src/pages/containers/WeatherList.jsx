@@ -36,7 +36,7 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
 
     const renderTime = (weather) => {
         const dts = weather.list.map(lis => lis.dt_txt)
-        const timesFullArray = dts.map(time => time.split(' ')[1])
+        const timesFullArray = dts.map(time => time.split(' ')[1]) // output: [date, time] and then grab time of index 1
         const times = timesFullArray.slice(0,16)
       return times.map(time => <th>{time.slice(0,5)}</th>)
     }
