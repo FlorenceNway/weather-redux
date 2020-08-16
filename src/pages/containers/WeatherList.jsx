@@ -42,10 +42,11 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
     }
 
     const renderIcon = (weather) => {
-        const fullIcons = weather.list.map((data, index) => data.weather[index])
+        const fullIcons = weather.list.map((data, index) => {return data.weather.map(da => da.icon)})
         const icons = fullIcons.slice(0,8)
+ 
       return icons.map((icon) => (
-          <td>
+          <td key={icon}>
             <img
               src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
               alt="icon"
