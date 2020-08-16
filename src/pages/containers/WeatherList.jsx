@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Sparklines, SparklinesLine } from "react-sparklines";
+import _ from 'lodash';
 
  const WeatherList = (props) => {
 
@@ -46,7 +47,7 @@ import { Sparklines, SparklinesLine } from "react-sparklines";
         const icons = fullIcons.slice(0,8)
  
       return icons.map((icon) => (
-          <td key={icon}>
+          <td key={_.uniqueId()}>
             <img
               src={`http://openweathermap.org/img/wn/${icon}@2x.png`}
               alt="icon"
